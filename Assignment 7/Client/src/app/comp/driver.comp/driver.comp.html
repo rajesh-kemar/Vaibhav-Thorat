@@ -1,0 +1,79 @@
+<div class="driver-container">
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <span>Show:</span>
+    <a [routerLink]="[]" [queryParams]="{ filter: '' }" [class.active]="!route.snapshot.queryParams['filter']">All</a> |
+    <a [routerLink]="[]" [queryParams]="{ filter: 'available' }" [class.active]="route.snapshot.queryParams['filter'] === 'available'">Available</a>
+  </div>
+
+  <!-- 🧑‍✈️ Left Section: Driver List -->
+  <div class="driver-list">
+    <h2>Driver List</h2>
+    <table class="driver-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Licence</th>
+          <th>Experience</th>
+          <th>Available</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let driver of drivers">
+          <td>{{ driver.driverName }}</td>
+          <td>{{ driver.licenceNumber }}</td>
+          <td>{{ driver.experienceYears }}</td>
+          <td>
+            <span [class.available]="driver.driverAvailable"
+                  [class.unavailable]="!driver.driverAvailable">
+              {{ driver.driverAvailable ? 'Yes' : 'No' }}
+            </span>
+          </td>
+          <td class="action-buttons">
+            <button class="btn btn-edit" (click)="editDriver(driver)">Edit</button>
+            <button class="btn btn-delete" (click)="deleteDriver(driver.driverId!)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 📝 Right Section: Add/Edit Driver Form -->
+  <div class="driver-form">
+    <h2>{{ editingDriverId ? '✏️ Edit Driver' : '➕ Add New Driver' }}</h2>
+
+    <form [formGroup]="driverForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Name:</label>
+        <input class="form-control" formControlName="driverName" />
+      </div>
+
+      <div class="form-group">
+        <label>Licence Number:</label>
+        <input class="form-control" formControlName="licenceNumber" />
+      </div>
+
+      <div class="form-group">
+        <label>Experience Years:</label>
+        <input type="number" class="form-control" formControlName="experienceYears" />
+      </div>
+
+      <div class="form-group checkbox-group">
+        <label>
+          <input type="checkbox" formControlName="driverAvailable" />
+          Available
+        </label>
+      </div>
+
+      <div class="form-buttons">
+        <button type="submit" class="btn btn-primary">
+          {{ editingDriverId ? 'Update Driver' : 'Add Driver' }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="cancelEdit()" *ngIf="editingDriverId">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,108 @@
+<div class="trip-container">
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <span>Show:</span>
+    <a [routerLink]="[]" [queryParams]="{ filter: '' }" [class.active]="!route.snapshot.queryParams['filter']">All</a> |
+    <a [routerLink]="[]" [queryParams]="{ filter: 'active' }" [class.active]="route.snapshot.queryParams['filter'] === 'active'">Active</a> |
+    <a [routerLink]="[]" [queryParams]="{ filter: 'completed' }" [class.active]="route.snapshot.queryParams['filter'] === 'completed'">Completed</a>
+  </div>
+
+  <!-- 🧭 Left Section: Trip Table -->
+  <div class="trip-list">
+    <h2>🚚 Trip List</h2>
+    <table class="trip-table">
+      <thead>
+        <tr>
+          <th>Driver</th>
+          <th>Vehicle</th>
+          <th>Vehicle No</th>
+          <th>Source</th>
+          <th>Destination</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let trip of trips">
+          <td>{{ trip.driver?.driverName }}</td>
+          <td>{{ trip.vehicle?.type || 'N/A' }}</td>
+          <td>{{ trip.vehicleNumber }}</td>
+          <td>{{ trip.source }}</td>
+          <td>{{ trip.destination }}</td>
+          <td>{{ trip.startdate | date:'short' }}</td>
+          <td>{{ trip.enddate | date:'short' }}</td>
+          <td>
+           <span [class.status-active]="trip.status === 'InProgress'"
+              [class.status-completed]="trip.status === 'completed'">
+              {{ trip.status }}
+            </span>
+          </td>
+          <td class="action-buttons">
+            <button class="btn btn-edit" (click)="editTrip(trip)">Edit</button>
+            <button class="btn btn-complete" *ngIf="trip.status === 'InProgress'" (click)="completeTrip(trip)">Complete</button>
+            <button class="btn btn-delete" (click)="deleteTrip(trip.tripId!)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 🧾 Right Section: Add/Edit Trip Form -->
+  <div class="trip-form">
+    <h2>{{ editingTripId ? '✏️ Edit Trip' : '➕ Add New Trip' }}</h2>
+
+    <form [formGroup]="tripForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+          <label>Driver:</label>
+          <select formControlName="driverId" class="form-control">
+            <option value="" disabled>Select Driver</option>
+            <option *ngFor="let d of availableDrivers" [value]="d.driverId">{{ d.driverName }}</option>
+          </select>
+      </div>
+
+      <div class="form-group">
+        <label>Vehicle:</label>
+        <select formControlName="vehicleId" class="form-control">
+          <option value="" disabled>Select Vehicle</option>
+          <option *ngFor="let v of availableVehicles" [value]="v.vehicleId">{{ v.vehicleNumber }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Vehicle Number:</label>
+        <input class="form-control" formControlName="vehicleNumber" readonly />
+      </div>
+
+      <div class="form-group">
+        <label>Source:</label>
+        <input class="form-control" formControlName="source" />
+      </div>
+
+      <div class="form-group">
+        <label>Destination:</label>
+        <input class="form-control" formControlName="destination" />
+      </div>
+
+      <div class="form-group">
+        <label>Start Date:</label>
+        <input type="datetime-local" class="form-control" formControlName="startdate" />
+      </div>
+
+      <div class="form-group">
+        <label>End Date:</label>
+        <input type="datetime-local" class="form-control" formControlName="enddate" />
+      </div>
+
+       <div class="form-buttons">
+        <button type="submit" class="btn btn-primary">
+          {{ editingTripId ? 'Update Trip' : 'Add Trip' }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="cancelEdit()" *ngIf="editingTripId">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

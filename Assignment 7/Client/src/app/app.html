@@ -1,0 +1,38 @@
+<div class="dashboard-container" [class.sidebar-collapsed]="isCollapsed">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>Trip Dashboard</h2>
+      <button class="toggle-btn" (click)="toggleSidebar()">
+        <span *ngIf="!isCollapsed">⏴</span>
+        <span *ngIf="isCollapsed">⏵</span>
+      </button>
+    </div>
+
+    <nav class="nav-links">
+      <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <i class="fa fa-home"></i> <span>Dashboard</span>
+      </a>
+      <a routerLink="/trip" routerLinkActive="active">
+        <i class="fa fa-route"></i> <span>Trips</span>
+      </a>
+      <a routerLink="/vehicle" routerLinkActive="active">
+        <i class="fa fa-car"></i> <span>Vehicles</span>
+      </a>
+      <a routerLink="/driver" routerLinkActive="active">
+        <i class="fa fa-user"></i> <span>Drivers</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main Content Area -->
+  <div class="main-section">
+    <header class="header">
+      <h1>Trip Management Dashboard</h1>
+    </header>
+
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

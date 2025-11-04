@@ -1,0 +1,33 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Dashboard</h2>
+
+  <div class="dashboard-row">
+    <div class="card bg-primary" (click)="navigateTo('trip', 'active')">
+      <div class="card-body">
+        <h5 class="card-title">Active Trips</h5>
+        <p class="card-text">{{ activeTrips }}</p>
+      </div>
+    </div>
+
+    <div class="card bg-success" (click)="navigateTo('trip', 'completed')">
+      <div class="card-body">
+        <h5 class="card-title">Completed Trips</h5>
+        <p class="card-text">{{ completedTrips }}</p>
+      </div>
+    </div>
+
+    <div class="card bg-info" (click)="navigateTo('driver', 'available')">
+      <div class="card-body">
+        <h5 class="card-title">Available Drivers</h5>
+        <p class="card-text">{{ availableDrivers }}</p>
+      </div>
+    </div>
+
+    <div class="card bg-warning" (click)="navigateTo('vehicle', 'available')">
+      <div class="card-body">
+        <h5 class="card-title">Available Vehicles</h5>
+        <p class="card-text">{{ availableVehicles }}</p>
+      </div>
+    </div>
+  </div>
+</div>

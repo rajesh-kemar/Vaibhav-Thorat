@@ -1,0 +1,73 @@
+<div class="vehicle-container">
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <span>Show:</span>
+    <a [routerLink]="[]" [queryParams]="{ filter: '' }" [class.active]="!route.snapshot.queryParams['filter']">All</a> |
+    <a [routerLink]="[]" [queryParams]="{ filter: 'available' }" [class.active]="route.snapshot.queryParams['filter'] === 'available'">Available</a>
+  </div>
+
+  <!-- 🚘 Left Section: Vehicle List -->
+  <div class="vehicle-list">
+    <h2>Vehicle List</h2>
+    <table class="vehicle-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Vehicle Number</th>
+          <th>Type</th>
+          <th>Available</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vehicle of vehicles">
+          <td>{{ vehicle.vehicleId }}</td>
+          <td>{{ vehicle.vehicleNumber }}</td>
+          <td>{{ vehicle.type }}</td>
+          <td>
+            <span [class.available]="vehicle.isAvailable" 
+                  [class.unavailable]="!vehicle.isAvailable">
+              {{ vehicle.isAvailable ? 'Yes' : 'No' }}
+            </span>
+          </td>
+          <td class="action-buttons">
+            <button class="btn btn-edit" (click)="editVehicle(vehicle)">Edit</button>
+            <button class="btn btn-delete" (click)="deleteVehicle(vehicle.vehicleId!)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 🚗 Right Section: Add/Edit Vehicle Form -->
+  <div class="vehicle-form">
+    <h2>{{ isEditMode ? '✏️ Edit Vehicle' : '➕ Add New Vehicle' }}</h2>
+
+    <form [formGroup]="vehicleForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="vehicleNumber">Vehicle Number</label>
+        <input id="vehicleNumber" type="text" class="form-control" formControlName="vehicleNumber" placeholder="Enter vehicle number">
+      </div>
+
+      <div class="form-group">
+        <label for="type">Type</label>
+        <input id="type" type="text" class="form-control" formControlName="type" placeholder="e.g., Truck, Car, Van">
+      </div>
+
+      <div class="form-group checkbox-group">
+        <label>
+          <input type="checkbox" formControlName="isAvailable" /> Available
+        </label>
+      </div>
+
+      <div class="form-buttons">
+        <button type="submit" class="btn btn-primary">
+          {{ isEditMode ? 'Update Vehicle' : 'Add Vehicle' }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="resetForm()" *ngIf="isEditMode">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

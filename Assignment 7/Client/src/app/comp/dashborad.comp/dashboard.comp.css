@@ -1,0 +1,97 @@
+/* ===== Dashboard Container ===== */
+.container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+/* ===== Dashboard Row in Flex ===== */
+.dashboard-row {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* ===== Card Styling ===== */
+.card {
+  flex: 1 1 220px;
+  min-width: 220px;
+  max-width: 260px;
+  border-radius: 12px;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  text-align: center;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== Gradient Backgrounds ===== */
+.bg-primary {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+}
+.bg-success {
+  background: linear-gradient(135deg, #28a745, #1e7e34);
+}
+.bg-info {
+  background: linear-gradient(135deg, #17a2b8, #117a8b);
+}
+.bg-warning {
+  background: linear-gradient(135deg, #ffc107, #e0a800);
+}
+
+/* ===== Card Body ===== */
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.card-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin: 0;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.card:hover .card-text {
+  transform: scale(1.15);
+  color: #fff;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .dashboard-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 90%;
+    max-width: 320px;
+  }
+
+  .card-text {
+    font-size: 2rem;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+}
