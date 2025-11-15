@@ -1,0 +1,74 @@
+
+<div class="registration-container">
+  <h2>User Registration</h2>
+
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate>
+
+    <!-- Name -->
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" formControlName="name" placeholder="Enter your full name" />
+      <div class="error" *ngIf="submitted && f['name'].errors">
+        <small *ngIf="f['name'].errors['required']">Name is required.</small>
+        <small *ngIf="f['name'].errors['minlength']">Name must be at least 3 characters.</small>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" formControlName="email" placeholder="Enter your email" />
+      <div class="error" *ngIf="submitted && f['email'].errors">
+        <small *ngIf="f['email'].errors['required']">Email is required.</small>
+        <small *ngIf="f['email'].errors['email']">Enter a valid email address.</small>
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" formControlName="password" placeholder="Enter your password" />
+      <div class="error" *ngIf="submitted && f['password'].errors">
+        <small *ngIf="f['password'].errors['required']">Password is required.</small>
+        <small *ngIf="f['password'].errors['minlength']">Password must be at least 6 characters.</small>
+      </div>
+    </div>
+
+    <!-- Role -->
+    <div class="form-group">
+      <label for="role">Select Role</label>
+      <select id="role" formControlName="role">
+        <option value="" disabled>Select a role</option>
+        <option value="Driver">Driver</option>
+        <option value="Dispatcher">Dispatcher</option>
+      </select>
+      <div class="error" *ngIf="submitted && f['role'].errors">
+        <small>Role is required.</small>
+      </div>
+    </div>
+
+    <!-- Driver Fields -->
+    <div *ngIf="isDriver">
+      <div class="form-group">
+        <label for="licenseNumber">License Number</label>
+        <input type="text" id="licenseNumber" formControlName="licenseNumber" placeholder="Enter license number" />
+        <div class="error" *ngIf="submitted && f['licenseNumber'].errors">
+          <small *ngIf="f['licenseNumber'].errors['required']">License number is required.</small>
+          <small *ngIf="f['licenseNumber'].errors['pattern']">Invalid license number format.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="experienceYears">Years of Experience</label>
+        <input type="number" id="experienceYears" formControlName="experienceYears" placeholder="Enter years of experience" />
+        <div class="error" *ngIf="submitted && f['experienceYears'].errors">
+          <small *ngIf="f['experienceYears'].errors['required']">Experience is required.</small>
+          <small *ngIf="f['experienceYears'].errors['min']">Minimum 1 year required.</small>
+          <small *ngIf="f['experienceYears'].errors['max']">Too high! Enter a valid number.</small>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-submit">Register</button>
+  </form>
+</div>

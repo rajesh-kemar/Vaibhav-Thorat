@@ -1,0 +1,227 @@
+/* ===== Vehicle Container ===== */
+.vehicle-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+}
+
+/* ===== Filter Bar ===== */
+.filter-bar {
+  width: 100%;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.filter-bar span {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.filter-bar a {
+  text-decoration: none;
+  color: #007bff;
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  margin-right: 0.3rem;
+}
+
+.filter-bar a:hover {
+  background-color: #e0eaff;
+  color: #0056b3;
+}
+
+.filter-bar a.active {
+  background-color: #007bff;
+  color: white;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+  transform: scale(1.05);
+}
+
+/* ===== Vehicle Table ===== */
+.vehicle-list {
+  flex: 1 1 60%;
+  overflow-x: auto;
+}
+
+.vehicle-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.vehicle-table th, .vehicle-table td {
+  padding: 0.6rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.vehicle-table th {
+  background-color: #007bff;
+  color: white;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.vehicle-table tr:nth-child(even) {
+  background-color: #f4f7f9;
+}
+
+.vehicle-table tr:hover {
+  background-color: #e9f1fb;
+  transform: scale(1.01);
+  transition: all 0.2s ease-in-out;
+}
+
+/* ===== Status Badges ===== */
+.available {
+  color: #28a745;
+  font-weight: bold;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background-color: #e6f4ea;
+}
+
+.unavailable {
+  color: #dc3545;
+  font-weight: bold;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background-color: #f9e6e6;
+}
+
+/* ===== Action Buttons ===== */
+.action-buttons button {
+  margin-right: 0.4rem;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-edit {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: #138496;
+  transform: scale(1.1);
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+  transform: scale(1.1);
+}
+
+/* ===== Vehicle Form ===== */
+.vehicle-form {
+  flex: 1 1 35%;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  min-width: 300px;
+}
+
+.vehicle-form h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #007bff;
+}
+
+.form-group {
+  margin-bottom: 0.85rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0,123,255,0.3);
+  outline: none;
+}
+
+/* ===== Checkbox Styling ===== */
+.checkbox-group {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-right: 0.4rem;
+  transform: scale(1.2);
+}
+
+/* ===== Form Buttons ===== */
+.form-buttons {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.form-buttons .btn {
+  margin-right: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(108, 117, 125, 0.4);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .vehicle-container {
+    flex-direction: column;
+  }
+
+  .vehicle-list, .vehicle-form {
+    flex: 1 1 100%;
+  }
+}

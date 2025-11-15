@@ -1,0 +1,61 @@
+<div class="login-container d-flex justify-content-center align-items-center vh-100">
+  <div class="login-card shadow p-4 rounded">
+    <h2 class="text-center mb-4">Login</h2>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      
+      <!-- Role selection -->
+      <div class="mb-3">
+        <label for="role" class="form-label">Role</label>
+        <select id="role" class="form-select" formControlName="role">
+          <option value="Dispatcher">Dispatcher</option>
+          <option value="Driver">Driver</option>
+        </select>
+      </div>
+
+      <!-- Driver Name input -->
+      <div class="mb-3">
+        <label for="driverName" class="form-label">Driver Name</label>
+        <input
+          type="text"
+          id="driverName"
+          class="form-control"
+          formControlName="driverName"
+          placeholder="Enter your name"
+        />
+      </div>
+
+      <!-- License Number input -->
+      <div class="mb-3">
+        <label for="licenceNumber" class="form-label">License Number</label>
+        <input
+          type="text"
+          id="licenceNumber"
+          class="form-control"
+          formControlName="licenceNumber"
+          placeholder="Enter your license number"
+        />
+      </div>
+
+      <!-- Password input -->
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+      </div>
+
+      <!-- Error message -->
+      <div *ngIf="errorMessage" class="text-danger mb-3 text-center">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Submit button -->
+      <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+  </div>
+</div>

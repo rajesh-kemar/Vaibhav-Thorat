@@ -1,0 +1,48 @@
+<!-- Top Navbar -->
+<nav class="navbar">
+  <div class="navbar-left">
+    <h1 class="app-title" (click)="goHome()">Trip Dashboard</h1>
+
+    <!-- Dispatcher Links -->
+    <ng-container *ngIf="role() === 'Dispatcher'">
+      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/trip" routerLinkActive="active">Trips</a>
+      <a routerLink="/vehicle" routerLinkActive="active">Vehicles</a>
+      <a routerLink="/driver" routerLinkActive="active">Drivers</a>
+    </ng-container>
+
+    <!-- Driver Links -->
+    <ng-container *ngIf="role() === 'Driver'">
+      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/my-trips" routerLinkActive="active">My Trips</a>
+    </ng-container>
+  </div>
+
+  <!-- Right Side Buttons -->
+  <div class="navbar-right">
+    <!-- Show Profile When Logged In -->
+    <div *ngIf="isLoggedIn()" class="user-profile">
+      <div class="user-info">
+        <span class="user-name">{{ userName }}</span>
+        <small class="user-role">{{ role() }}</small>
+      </div>
+      <div class="user-avatar">
+        <i class="bi bi-person-circle"></i>
+      </div>
+    </div>
+
+    <!-- Buttons when not logged in -->
+    <div *ngIf="!isLoggedIn()">
+      <button class="btn btn-outline-primary me-2" (click)="goLogin()">Login</button>
+      <button class="btn btn-outline-success" (click)="goRegister()">Sign Up</button> <!-- 👈 New button -->
+    </div>
+
+    <!-- Logout button when logged in -->
+    <button class="btn btn-outline-danger" *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<main class="content">
+  <router-outlet></router-outlet>
+</main>

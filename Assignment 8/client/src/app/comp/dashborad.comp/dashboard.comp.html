@@ -1,0 +1,93 @@
+<div class="dashboard-container">
+  <!-- Header -->
+  <div class="dashboard-header">
+    <h2>Dashboard</h2>
+  </div>
+
+  <!-- Dashboard Cards -->
+  <div class="dashboard-cards">
+    <!-- Common Cards -->
+    <div class="stat-card bg-primary" (click)="navigateTo('trip', 'active')">
+      <div class="card-content">
+        <h5>Active Trips</h5>
+        <p>{{ activeTrips }}</p>
+      </div>
+    </div>
+
+    <div class="stat-card bg-success" (click)="navigateTo('trip', 'completed')">
+      <div class="card-content">
+        <h5>Completed Trips</h5>
+        <p>{{ completedTrips }}</p>
+      </div>
+    </div>
+
+    <!-- Dispatcher-only Cards -->
+    <ng-container *ngIf="role === 'Dispatcher'">
+      <div class="stat-card bg-secondary">
+        <div class="card-content">
+          <h5>Total Trips</h5>
+          <p>{{ totalTrips }}</p>
+        </div>
+      </div>
+
+      <div class="stat-card bg-dark text-white" (click)="navigateTo('driver')">
+        <div class="card-content">
+          <h5>Total Drivers</h5>
+          <p>{{ totalDrivers }}</p>
+        </div>
+      </div>
+
+      <div class="stat-card bg-danger" (click)="navigateTo('driver', 'busy')">
+        <div class="card-content">
+          <h5>Drivers Busy in Trips</h5>
+          <p>{{ driversBusyInTrips }}</p>
+        </div>
+      </div>
+
+      <div class="stat-card bg-warning" (click)="navigateTo('vehicle')">
+        <div class="card-content">
+          <h5>Total Vehicles</h5>
+          <p>{{ totalVehicles }}</p>
+        </div>
+      </div>
+
+      <div class="stat-card bg-info" (click)="navigateTo('vehicle', 'busy')">
+        <div class="card-content">
+          <h5>Vehicles Busy in Trips</h5>
+          <p>{{ vehiclesBusyInTrips }}</p>
+        </div>
+      </div>
+
+      <div class="stat-card bg-success" (click)="navigateTo('driver', 'available')">
+        <div class="card-content">
+          <h5>Available Drivers</h5>
+          <p>{{ availableDrivers }}</p>
+        </div>
+      </div>
+
+      <div class="stat-card bg-primary" (click)="navigateTo('vehicle', 'available')">
+        <div class="card-content">
+          <h5>Available Vehicles</h5>
+          <p>{{ availableVehicles }}</p>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Driver-only Summary -->
+    <ng-container *ngIf="role === 'Driver'">
+      <div class="stat-card bg-secondary">
+        <div class="card-content">
+          <h5>Total Trips</h5>
+          <p>{{ driverTotalTrips }}</p>
+        </div>
+      </div>
+
+      <div class="stat-card bg-dark text-white">
+        <div class="card-content">
+          <h5>Total Hours Driven</h5>
+          <p>{{ driverTotalHours }}</p>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

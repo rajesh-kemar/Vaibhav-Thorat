@@ -1,0 +1,121 @@
+/* ===== Navbar ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #0056b3, #007bff);
+  padding: 0.8rem 2rem;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.app-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 0;
+  transition: 0.3s ease;
+}
+
+.app-title:hover {
+  color: #ffd700;
+}
+
+.navbar-left a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.navbar-left a:hover,
+.navbar-left a.active {
+  color: #ffd700;
+  text-decoration: underline;
+}
+
+/* ===== Right Side ===== */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ===== User Profile ===== */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  transition: 0.3s ease;
+}
+
+.user-profile:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  line-height: 1.2;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.user-role {
+  font-size: 0.8rem;
+  color: #e0e0e0;
+}
+
+.user-avatar {
+  font-size: 1.6rem;
+  color: #fff;
+}
+
+/* ===== Buttons ===== */
+.btn {
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary {
+  border: 1px solid #fff;
+  color: white;
+}
+
+.btn-outline-primary:hover {
+  background: #fff;
+  color: #007bff;
+}
+
+.btn-outline-danger {
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+}
+
+.btn-outline-danger:hover {
+  background: #ff4d4d;
+  color: white;
+}
+
+/* ===== Main Content ===== */
+.content {
+  padding: 2rem;
+  background: #f8f9fa;
+  min-height: calc(100vh - 60px);
+}

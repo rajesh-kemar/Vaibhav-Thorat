@@ -1,0 +1,126 @@
+<div class="trip-container">
+  <!-- Header and Add Trip Button -->
+  <div class="header-bar">
+    <h2>🚚 Trip Management</h2>
+    <button *ngIf="role === 'Dispatcher'" class="btn btn-add" (click)="openAddTripForm()">➕ Add New Trip</button>
+  </div>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <span>Show:</span>
+    <a [routerLink]="[]" [queryParams]="{ filter: '' }" 
+       [class.active]="!route.snapshot.queryParams['filter']">All</a> |
+    <a [routerLink]="[]" [queryParams]="{ filter: 'active' }" 
+       [class.active]="route.snapshot.queryParams['filter'] === 'active'">Active</a> |
+    <a [routerLink]="[]" [queryParams]="{ filter: 'completed' }" 
+       [class.active]="route.snapshot.queryParams['filter'] === 'completed'">Completed</a>
+  </div>
+
+  <!-- Trip List -->
+  <div class="trip-list">
+    <table class="trip-table">
+      <thead>
+        <tr>
+          <th>Driver</th>
+          <th>Vehicle</th>
+          <th>Vehicle No</th>
+          <th>Source</th>
+          <th>Destination</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let trip of filteredTrips">
+          <td>{{ trip.driver?.driverName }}</td>
+          <td>{{ trip.vehicle?.type || 'N/A' }}</td>
+          <td>{{ trip.vehicleNumber }}</td>
+          <td>{{ trip.source }}</td>
+          <td>{{ trip.destination }}</td>
+          <td>{{ trip.startdate | date:'short' }}</td>
+          <td>{{ trip.enddate | date:'short' }}</td>
+          <td>
+            <span [class.status-active]="trip.status === 'InProgress'"
+                  [class.status-completed]="trip.status === 'completed'">
+              {{ trip.status }}
+            </span>
+          </td>
+          <td>
+            <ng-container *ngIf="role === 'Dispatcher'">
+              <button class="btn btn-edit" (click)="openEditForm(trip)">Edit</button>
+              <button class="btn btn-complete" 
+                      *ngIf="trip.status === 'InProgress'" 
+                      (click)="completeTrip(trip)">Complete</button>
+              <button class="btn btn-delete" (click)="deleteTrip(trip.tripId!)">Delete</button>
+            </ng-container>
+
+            <ng-container *ngIf="role === 'Driver' && trip.status === 'InProgress' && trip.driverId === driverId">
+              <button class="btn btn-complete" (click)="completeTrip(trip)">Mark Completed</button>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Popup Modal Form -->
+  <div class="modal-overlay" *ngIf="showForm" (click)="closeForm($event)">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h2>{{ editingTripId ? '✏️ Edit Trip' : '➕ Add New Trip' }}</h2>
+
+      <form [formGroup]="tripForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label>Driver:</label>
+          <select formControlName="driverId" class="form-control">
+            <option value="" disabled>Select Driver</option>
+            <option *ngFor="let d of availableDrivers" [value]="d.driverId">{{ d.driverName }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Vehicle:</label>
+          <select formControlName="vehicleId" class="form-control" (change)="onVehicleChange($event)">
+            <option value="" disabled>Select Vehicle</option>
+            <option *ngFor="let v of availableVehicles" [value]="v.vehicleId">{{ v.type }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Vehicle Number:</label>
+          <input class="form-control" formControlName="vehicleNumber" readonly />
+        </div>
+
+        <div class="form-group">
+          <label>Source:</label>
+          <input class="form-control" formControlName="source" />
+        </div>
+
+        <div class="form-group">
+          <label>Destination:</label>
+          <input class="form-control" formControlName="destination" />
+        </div>
+
+        <div class="form-group">
+          <label>Start Date:</label>
+          <input type="datetime-local" class="form-control" formControlName="startdate" />
+        </div>
+
+        <div class="form-group">
+          <label>End Date:</label>
+          <input type="datetime-local" class="form-control" formControlName="enddate" />
+        </div>
+
+        <div class="form-buttons">
+          <button type="submit" class="btn btn-primary">
+            {{ editingTripId ? 'Update Trip' : 'Add Trip' }}
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="closeForm($event)">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
